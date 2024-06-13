@@ -1,0 +1,164 @@
+{extend name="$laket_admin_layout"/}
+
+{block name="main"}
+<style type="text/css">
+.lake-admin-container {
+    background-color: #FFF;
+}
+.childrenBody {
+    background: #fff;
+}
+.layui-layer-page .layui-layer-content {
+    overflow: inherit;
+}
+</style>
+<div class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form search-from" method="get">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="laydate" placeholder="搜索时间范围">
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" name="keyword" class="layui-input searchVal" placeholder="请输入关键词">
+                </div>
+                <a class="layui-btn search_btn" data-type="reload">搜索</a>
+            </div>
+        </form>
+    </blockquote>
+    
+    <table class="layui-hide" id="dataTable" lay-filter="dataTable"></table>
+</div>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+      <a class="layui-btn layui-btn-sm layui-iframe" href="{:laket_route('admin.cms.content-add', ['cateid'=>$cateid])}" title="新增内容">新增内容</a>
+      <a class="layui-btn layui-btn-sm layui-btn-danger confirm layui-batch-all" data-href='{:laket_route("admin.cms.content-delete", ["cateid"=>$cateid])}'>批量删除</a>
+    </div>
+</script>
+
+<script type="text/html" id="barTool">
+    <a href='{:laket_route("admin.cms.content-edit")}?cateid={$cateid}&id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑内容">编辑</a>
+    <a href='{:laket_route("admin.cms.content-delete")}?cateid={$cateid}&ids={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+</script>
+
+<script type="text/html" id="addTimeTpl">
+    {{ layui.util.toDateString(d.add_time * 1000) }}
+</script>
+
+<script type="text/html" id="urlTpl">
+    <div>
+        <a href="{{ d.url }}" target="_blank">
+            <i class="iconfont icon-lianjie"></i>
+        </a>
+    </div>
+</script>
+
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" name="status" data-href="{:laket_route('admin.cms.content-state')}?cateid={$cateid}&id={{ d.id }}" value="{{d.id}}" lay-skin="switch" lay-text="开启|关闭" lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}>
+</script>
+
+<script type="text/html" id="flagTpl">
+  {{# if(d.flag.indexOf("1")!==-1){ }}
+  <span class="layui-badge layui-bg-green">置顶</span>
+  {{#  } }}
+  {{# if(d.flag.indexOf("2")!==-1){ }}
+  <span class="layui-badge layui-bg-cyan">头条</span>
+  {{#  } }}
+  {{# if(d.flag.indexOf("3")!==-1){ }}
+  <span class="layui-badge layui-bg-orange">特荐</span>
+  {{#  } }}
+  {{# if(d.flag.indexOf("4")!==-1){ }}
+  <span class="layui-badge layui-bg-blue">推荐</span>
+  {{#  } }}
+  {{# if(d.flag.indexOf("5")!==-1){ }}
+  <span class="layui-badge">热点</span>
+  {{#  } }}
+  {{# if(d.flag.indexOf("6")!==-1){ }}
+  <span class="layui-badge layui-bg-black">幻灯</span>
+  {{#  } }}
+</script>
+
+{/block}
+
+{block name="script"}
+<script>
+layui.use(['table', 'laydate'], function() {
+    var table = layui.table,
+        $ = layui.$,
+        form = layui.form,
+        laydate = layui.laydate;
+        
+    laydate.render({
+        elem: '#laydate',
+        range: true,
+    });
+    
+    var startCols = [
+        { type: 'checkbox', fixed: 'left' },
+        { field: 'id', width: 60, title: '#', align: "center" },
+    ];
+    
+    var list_grid = {:json_encode($cate['list_grids'], true)};
+    var userCols = [];
+    for (var name in list_grid) {
+        var format = '';
+        if (list_grid[name].format != '') {
+            userCols.push({
+                field: list_grid[name].name,
+                title: list_grid[name].title,
+                templet: '#' + list_grid[name].format + 'Tpl',
+            });
+        } else {
+            userCols.push({
+                field: list_grid[name].name,
+                title: list_grid[name].title,
+            });
+        }
+    }
+    
+    var endCols = [
+        { field: 'add_time', width: 160, title: '更新时间', templet: '#addTimeTpl' },
+        { field: 'url', width: 60,align:"center", title: 'URL', templet:'#urlTpl'},
+        { field: 'status', width: 100, align: "center", title: '状态', templet: '#statusTpl'},
+        { fixed: 'right', width: 120, title: '操作', toolbar: '#barTool' }
+    ];
+    
+    var newCols = [];
+    for (var name in startCols) {
+        newCols.push(startCols[name]);
+    }
+    for (var name2 in userCols) {
+        newCols.push(userCols[name2]);
+    }
+    for (var name3 in endCols) {
+        newCols.push(endCols[name3]);
+    }
+    
+    table.render({
+        elem: '#dataTable',
+        toolbar: '#toolbarDemo',
+        url: '{:laket_route("admin.cms.content-cate", ["cateid"=>$cateid])}',
+        cols: [
+            newCols
+        ],
+        page: {}
+    });
+
+    $(".search_btn").on("click", function() {
+        table.reload("dataTable", {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            },
+            where: {
+                search_field: '',
+                keyword: $(".searchVal").val(),
+                filter_time: 'add_time',
+                filter_time_range: $("#laydate").val()
+            }
+        })
+    });
+
+});
+</script>
+{/block}

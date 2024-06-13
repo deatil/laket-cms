@@ -1,0 +1,46 @@
+{extend name="$laket_admin_layout"/}
+
+{block name="main"}
+<form class="layui-form form-horizontal" method="post">
+    {template file="laket-cms::common.inputItem" /}
+    
+    <input type="hidden" name="id" value="{$info['id']}">
+    
+    {if count($fieldList)}
+    <div class="layui-form-item">
+        <div>
+            <button class="layui-btn ajax-post" lay-submit lay-filter="*" target-form="form-horizontal">立即提交</button>
+        </div>
+    </div>
+    {/if}
+</form>
+{/block}
+
+{block name="layui"}{/block}
+
+{block name="script"}
+<script type="text/javascript">
+layui.config({
+    version: "{:config('lake.release')}",
+    base: 'admin/libs/layui-extend/'
+}).use(['form', 'layer', 'notice'], function() {
+    $('.ajax-post').on('click', function(e) {
+        var form = layui.form,
+            notice = layui.notice,
+            layer = layui.layer,
+            target_form = $(this).attr('target-form'),
+            target = $('.form-horizontal').attr("action");
+        
+        $.post(target, $('.form-horizontal').serialize()).success(function(data) {
+            if (data.code == 1) {
+                notice.success(data.msg);
+                location.reload();
+            } else {
+                notice.error(data.msg);
+            }
+        });
+        return false;
+    });
+})
+</script>
+{/block}

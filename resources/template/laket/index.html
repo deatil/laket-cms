@@ -1,0 +1,175 @@
+{extend name="$cms_layout"/}
+
+{block name="content"}
+
+<div class="part2">
+    <div class="contitbox">
+        <div class="tit ccsl">精品案例<span> · 智慧之选</span></div>
+        <div class="line"></div>
+        <div class="sub">专注为客户提供优质产品，贴心服务</div>
+    </div>
+    
+    <ul>
+        {contents field="id,title,cover,description" catename="case" limit="4" order="add_time DESC" return="data"}
+        <li>
+            <a href="{:url('cms.content', ['catename' => 'case', 'id' => $data['id']])}">
+                <img src="{$data.cover}" width="270" height="290"/>
+                <div class="item">
+                    <div class="tit ccsl">{$data.title}</div>
+                    <div class="sub ccsl">{:cms_str_cut($data['description'], 50)}</div>
+                </div>
+            </a>
+        </li>
+        {/contents}
+    </ul>
+
+</div>
+<div class="clear"></div>
+
+<div class="linebox"></div>
+<div class="clear"></div>
+<div class="part3">
+  <div class="contitbox">
+    <div class="tit ccsl">产品中心 <span>· 品质保证</span></div>
+    <div class="line"></div>
+    <div class="sub">你需要的就是我们专注的</div>
+  </div>
+  <div class="part3L">
+    <div class="titbox">
+      <p class="ccsl">产品中心</p>
+    </div>
+    <ul style="height:291px">
+        {cates field="id,parentid,name,title,sort" limit="6" order="sort ASC" condition="parentid=10" return="data"}
+            <li>
+                <a href="{:url('cms.cate', ['catename' => $data['name']])}" target="_self" class="ccsl">
+                    {$data.title}
+                </a>
+            </li>
+        {/cates}
+    </ul>
+    <div class="lxwm">
+      <div class="tel1">全国服务热线：</div>
+      <div class="tel2">000-000-0000 </div>
+    </div>
+  </div>
+  <div class="part3R">
+    <ul id="tab">
+       <li class="current"><a>热销推荐</a></li>
+       <li><a>新品推荐</a></li>
+    </ul>
+    <div id="content">
+      <ul style="display:block">
+        {contents field="id,title,cover,views,categoryid" catename="product" limit="4" order="views DESC" inchildren='inchildren' return="data"}
+        <li>
+            <a href="{:cms_content_url($data['cate']['name'], $data['id'])}">
+              <img src="{$data.cover}" width="280" height="280"/>
+              <p class="ccsl">{$data.title}</p>
+          </a>
+        </li>
+        {/contents}
+      </ul>
+      
+      <ul>
+        {contents field="id,title,cover,views,categoryid" catename="product" limit="4" order="add_time DESC" inchildren='inchildren' return="data"}
+        <li>
+            <a href="{:cms_content_url($data['cate']['name'], $data['id'])}">
+              <img src="{$data.cover}" width="280" height="280"/>
+              <p class="ccsl">{$data.title}</p>
+          </a>
+        </li>
+        {/contents}
+      </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="part4">
+  <div class="contitbox">
+    <div class="tit ccsl">新闻 <span>· 资讯</span></div>
+    <div class="line"></div>
+    <div class="sub">您身边的新材料知识百科全书</div>
+  </div>
+  <div class="part4L">
+    <div class="titbox">
+      <p class="ccsl">行业新闻</p>
+    </div>
+    {contents field="id,title,description,cover,add_time" catename="news" limit="1" order="add_time DESC" condition="cover is not null" return="data"}
+    <div class="part4One">
+      <div class="p4l">
+        <a href="{:url('cms.content', ['catename' => 'news', 'id' => $data['id']])}">
+            <img src="{$data.cover}" width="240" height="130" />
+        </a>
+      </div>
+      <div class="p4r">
+        <a href="{:url('cms.content', ['catename' => 'news', 'id' => $data['id']])}" class="ccsl">{$data.title}</a>
+        <span>{:date('Y-m-d', $data['add_time'])}</span>
+        <div class="clear"></div>
+        <div class="sub">{:cms_str_cut($data['description'], 650)}</div>
+      </div>
+    </div>
+    {/contents}
+    <ul>
+        {contents field="id,title,add_time" catename="news" limit="5" order="add_time DESC" return="data"}
+            <li>
+                <a href="{:url('cms.content', ['catename' => 'news', 'id' => $data['id']])}" class="ccsl">{$data.title}</a>
+                <span>{:date('Y-m-d', $data['add_time'])}</span>
+            </li>
+        {/contents}
+    </ul>
+  </div>
+  <div class="part4R">
+    <div class="titbox">
+      <p class="ccsl">公司新闻</p>
+    </div>
+    {contents field="id,title,cover" catename="company" limit="1" order="add_time DESC" condition="cover <> ''" return="data"}
+    <div class="part4two">
+      <a href="{:url('cms.content', ['catename' => 'company', 'id' => $data['id']])}">
+        <img src="{$data.cover}" alt="{$data.title}" width="570" height="130" />
+      </a>
+    </div>
+    {/contents}
+    <ul>
+        {contents field="id,title,add_time" catename="company" limit="5" order="add_time DESC" return="data"}
+            <li>
+                <a href="{:url('cms.content', ['catename' => 'company', 'id' => $data['id']])}" class="ccsl">{$data.title}</a>
+                <span>{:date('Y-m-d', $data['add_time'])}</span>
+            </li>
+        {/contents}
+    </ul>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="clear"></div>
+{/block}
+
+{block name="footer_script"}
+<script type="text/javascript">
+$(document).ready(function () {
+  var oLi = document.getElementById("tab").getElementsByTagName("li");
+    var oUl = document.getElementById("content").getElementsByTagName("ul");
+        
+    for(var i = 0; i < oLi.length; i++)
+    {
+        oLi[i].index = i;
+        oLi[i].onmouseover = function ()
+        {
+            
+            for(var n = 0; n < oLi.length; n++)
+                oLi[n].className="";
+                
+            this.className = "current";
+            
+            for(var n = 0; n < oUl.length; n++) 
+                oUl[n].style.display = "none";
+                
+            oUl[this.index].style.display = "block";
+            if(oUl[this.index].title == ""){
+                $.parser.parse(oUl[this.index]);
+                oUl[this.index].title = "parsed";
+            }
+        }
+    }
+})
+</script>
+{/block}

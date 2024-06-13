@@ -1,0 +1,49 @@
+{extend name="$cms_layout"/}
+
+{block name="banner_wellcome"}{/block}
+
+{block name="content"}
+
+<div class="clear"></div>
+<div class="detailbox">
+  <div class="xq">
+    <div class="tit">{$info.title}</div>
+    
+    <div class="date">
+        发表时间：{:date('Y-m-d H:i', $info['add_time'])}
+        
+        &nbsp;&nbsp;&nbsp;
+        栏目：
+        <a href="{:url('cms.cate', ['catename' => $cate['name']])}" target="_blank">
+            <span class="news-cate">
+                {$cate.title}
+            </span>
+        </a>
+    </div>
+    
+    <img src="{$info.cover}" class="prroimg"/>
+    
+    <div class="con">{$info.content|raw}</div>
+    
+    <div class="con-prev-next">
+        {php}
+        $catename = $cate['name'];
+        $contentid = $info['id'];
+        {/php}
+        {contentprev catename="$catename" field="id,title" contentid="$contentid" return="data"}
+            <div class="con-prev">
+                上一产品：
+                <a href="{:url('cms.content', ['catename' => $cate['name'], 'id' => $data['id']])}" title="{$data['title']}">{$data['title']}</a>
+            </div>
+        {/contentprev}
+        
+        {contentnext catename="$catename" field="id,title" contentid="$contentid" return="data"}
+            <div class="con-next">
+                下一产品：
+                <a href="{:url('cms.content', ['catename' => $cate['name'], 'id' => $data['id']])}" title="{$data['title']}">{$data['title']}</a>
+            </div>
+        {/contentnext}
+    </div>
+  </div>
+</div>
+{/block}

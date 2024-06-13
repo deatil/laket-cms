@@ -1,0 +1,193 @@
+{extend name="$laket_admin_layout"/}
+
+{block name="main"}
+<div class="layui-card">
+    <div class="layui-card-header layui-bg-cyan">网站设置</div>
+    <div class="layui-card-body">
+        <form class="layui-form" method="post">
+            <div class="layui-tab">
+                <div class="layui-tab-title">
+                    <li class="layui-this">
+                        基础
+                    </li>
+                    <li>
+                        联系方式
+                    </li>
+                    <li>
+                        功能设置
+                    </li>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-form-item">
+                            <label class="">站点网址</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[site_url]" placeholder="请输入站点网址" class="layui-input" value="{$setting['site_url']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">站点名称</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[site_name]" placeholder="请输入站点名称" class="layui-input" value="{$setting['site_name']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">站点标语</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[site_slogan]" placeholder="请输入站点标语" class="layui-input" value="{$setting['site_slogan']}">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">通常显示在网站的首页站点名称之后</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">站点关键词</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[site_keywords]" placeholder="请输入站点关键词"  class="layui-input" value="{$setting['site_keywords']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">站点描述</label>
+                            <div class="layui-form-field-label">
+                                <textarea name="setting[site_description]" placeholder="请输入站点描述" class="layui-textarea">{$setting['site_description']}</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="layui-form-item layui-form-text">
+                            <label class="">网站LOGO </label>
+                            <div class="layui-form-field-label">
+                                <div class="js-upload-image">
+                                    <div id="file_list_web_site_logo" class="uploader-logo">
+                                        {notempty name="$setting.web_site_logo"}
+                                        <div class="file-item thumbnail">
+                                            <img data-original="{$setting.web_site_logo|laket_attachment_url|default='admin/img/none.png'}" src="{$setting.web_site_logo|laket_attachment_url|default='admin/img/none.png'}" width="100" style="max-height: 100px;">
+                                            <i class="iconfont icon-delete_fill remove-picture" data-id="{$setting.web_site_logo}"></i>
+                                        </div>
+                                        {/notempty}
+                                    </div>
+                                    <input type="hidden" 
+                                        name="setting[web_site_logo]" 
+                                        data-multiple="false" 
+                                        data-watermark='' 
+                                        data-thumb='' 
+                                        data-size="{:config('app.upload_image_size')}" 
+                                        data-ext="{:config('app.upload_image_ext')}" 
+                                        id="web_site_logo" 
+                                        value="{$setting.web_site_logo|default=''}">
+                                    <div class="layui-clear"></div>
+                                    <div id="picker_web_site_logo">
+                                        <i class="layui-icon layui-icon-upload"></i> 
+                                        上传单张图片
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="layui-tab-item">
+                        <div class="layui-form-item">
+                            <label class="">公司名称</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[web_site_company]" placeholder="请输入公司名称"  class="layui-input" value="{$setting['web_site_company']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">地址</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[web_site_address]" placeholder="请输入地址"  class="layui-input" value="{$setting['web_site_address']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">联系QQ</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[web_site_qq]" placeholder="请输入联系QQ"  class="layui-input" value="{$setting['web_site_qq']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">电话</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[web_site_telphone]" placeholder="请输入电话"  class="layui-input" value="{$setting['web_site_telphone']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">手机</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[web_site_phone]" placeholder="请输入手机"  class="layui-input" value="{$setting['web_site_phone']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">邮箱</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[web_site_email]" placeholder="请输入邮箱"  class="layui-input" value="{$setting['web_site_email']}">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="">备案信息</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[web_site_icp]" placeholder="请输入备案信息"  class="layui-input" value="{$setting['web_site_icp']}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-tab-item">
+                        <div class="layui-form-item">
+                            <label class="">站点开关</label>
+                            <div class="layui-form-field-label">
+                                <input type="checkbox" name="setting[web_site_status]" lay-skin="switch" lay-text="ON|OFF" value="1" {if 1 == $setting['web_site_status']}checked='' {/if}>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">站点关闭后前台将不能访问</div>
+                        </div>
+                        
+                        <div class="layui-form-item">
+                            <label class="">启用标签</label>
+                            <div class="layui-form-field-label">
+                                <input type="checkbox" name="setting[web_site_tag]" lay-skin="switch" lay-text="ON|OFF" value="1" {if 1 == $setting['web_site_tag']}checked='' {/if}>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">启用标签需要自定义标签页面</div>
+                        </div>
+                        
+                        <div class="layui-form-item">
+                            <label class="">启用搜索</label>
+                            <div class="layui-form-field-label">
+                                <input type="checkbox" name="setting[web_site_search]" lay-skin="switch" lay-text="ON|OFF" value="1" {if 1 == $setting['web_site_search']}checked='' {/if}>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">启用搜索需要自定义搜索页面</div>
+                        </div>
+                        
+                        <div class="layui-form-item">
+                            <label class="">缓存时间</label>
+                            <div class="layui-form-field-label">
+                                <input type="text" name="setting[site_cache_time]" placeholder="请输入缓存时间"  class="layui-input" value="{$setting['site_cache_time']}">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">单页和详情页有效</div>
+                        </div>
+                        
+                        <div class="layui-form-item">
+                            <label class="">站点代码</label>
+                            <div class="layui-form-field-label">
+                                <textarea name="setting[web_site_statistics]" placeholder="请输入站点代码" class="layui-textarea">{$setting['web_site_statistics']}</textarea>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">站点代码通常放置一些网站统计代码、客服代码等等</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="layui-form-item">
+                <button class="layui-btn" lay-submit="" lay-filter="formSubmit">保存设置</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="admin/js/webuploader/webuploader.min.js"></script>
+<link rel="stylesheet" href="admin/js/webuploader/webuploader.css">
+<script type="text/javascript" src="admin/js/viewer/viewer.min.js"></script>
+<link rel="stylesheet" href="admin/js/viewer/viewer.min.css">
+
+<script type="text/javascript">
+$(function () {
+    $('.uploader-logo').viewer();
+});
+</script>
+{/block}
+

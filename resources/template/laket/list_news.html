@@ -1,0 +1,42 @@
+{extend name="$cms_layout"/}
+
+{block name="content"}
+
+<div class="clear"></div>
+<div class="mainWarp">
+
+    {template file="cms::laket.common.product_list" /}
+  
+  <div class="mainR">
+    <ul class="listul">
+    
+      {volist name="$list" id="data"}
+      <li>
+        <div class="liL">
+          <div class="day">{:date('d', $data['add_time'])}</div>
+          <div class="year">{:date('Y/m', $data['add_time'])}</div>
+        </div>
+        <div class="liR">
+          <a href="{:cms_content_url($data['cate']['name'], $data['id'])}" class="ccsl">{$data.title}</a>
+          <div class="sub">{:cms_str_cut($data['description'], 650)}</div>
+        </div>
+        <div class="clear"></div>
+      </li>
+      {/volist}
+      
+    </ul> 
+    
+    {if !empty($page)}
+    <div class="clear"></div>
+    <div class="pagebox">
+        {php}
+        $url = url('cms.cate', ['catename' => $cate['name'], 'page' => '[PAGE]']);
+        {/php}
+        {pager url="$url" page="$page" total="$total"/}
+    </div>
+    {/if} 
+    
+  </div>
+  <div class="clear"></div>
+</div>
+{/block}

@@ -1,0 +1,42 @@
+{
+    "name": "lake/laket-cms",
+    "description": "CMS内容管理系统",
+    "license": "Apache-2.0",
+    "type": "library",
+    "keywords": [
+        "lake",
+        "admin",
+        "lake-admin",
+        "addon",
+        "database"
+    ],
+    "homepage": "https://github.com/deatil/laket-cms",
+    "authors": [
+        {
+            "name": "deatil",
+            "email": "deatil@github.com",
+            "homepage": "https://github.com/deatil"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "laket/laket-admin": "1.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laket\\Admin\\CMS\\": "src"
+        }
+    },
+    "laket" : {
+        "title": "CMS",
+        "version": "1.0.1",
+        "adaptation": "1.2.*"
+    },
+    "extra": {
+        "think":{
+            "services":[
+                "Laket\\Admin\\CMS\\Service"
+            ]
+        }
+    }
+}
