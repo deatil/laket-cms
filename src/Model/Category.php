@@ -181,7 +181,7 @@ class Category extends BaseModel
      */
     public static function getAll()
     {
-        $cacheId = 'cms_cate_cahce';
+        $cacheId = 'cms_cate_cache';
         
         $list = Cache::get($cacheId);
         if (! $list) {
