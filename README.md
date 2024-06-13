@@ -19,13 +19,37 @@
 *  用户首页: `/cms`
 
 
-截图预览
+### 截图预览
 
-![LakeAdmin](https://user-images.githubusercontent.com/24578855/106987325-294cd580-67a8-11eb-8ca5-b4bd8323847b.png)
+<table>
+    <tr>
+        <td width="50%">
+            <center>
+                <img alt="LaketCMS" src="https://github.com/deatil/laket-cms/assets/24578855/00e24b77-d1fe-4bf2-85dd-1fd25bf83fef" />
+            </center>
+        </td>
+        <td width="50%">
+            <center>
+                <img alt="LaketCMS2" src="https://github.com/deatil/laket-cms/assets/24578855/ed4bccca-756c-446e-8155-57350e4b7167" />
+            </center>
+        </td>
+    </tr>
+    <tr>
+        <td width="50%">
+            <center>
+                <img alt="LaketCMS3" src="https://github.com/deatil/laket-cms/assets/24578855/658932e8-d9ef-4929-8e4b-de5091aaffb6" />
+            </center>
+        </td>
+        <td width="50%">
+            <center>
+                <img alt="LaketCMS4" src="https://github.com/deatil/laket-cms/assets/24578855/a1b4fd6a-b665-49a5-a076-31caf4a5956c" />
+            </center>
+        </td>
+    </tr>
+</table>
 
-![LakeAdmin2](https://user-images.githubusercontent.com/24578855/106987335-2e118980-67a8-11eb-8cfb-84c52bfe73ce.png)
-
-![LakeAdmin3](https://user-images.githubusercontent.com/24578855/106987717-08d14b00-67a9-11eb-85f7-59d0259f6517.png)
+更多截图 
+[Laket CMS 系统截图](https://github.com/deatil/laket-cms/issues/1)
 
 
 ## 问题反馈
