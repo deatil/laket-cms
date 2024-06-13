@@ -117,6 +117,7 @@
             </div>
             {/if}
             
+            {if $info['type'] == 1}
             <div class="layui-form-item">
                 <label class="layui-form-label">
                     列表地址
@@ -140,10 +141,27 @@
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">
+                        填写字母、数字、下划线及其组合，为空不重写, 重写ID为必填。例如: /cms/news/:id
+                    </div>
+                </div>
+            </div>
+            {/if}
+            
+            {if $info['type'] == 2}
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    单页地址
+                </label>
+                <div class="layui-input-block w500">
+                    <input type="text" name="index_url" value="{$info.index_url|default=''}" autocomplete="off" placeholder="列表地址" class="layui-input">
+                </div>
+                <div class="layui-input-block">
+                    <div class="layui-form-mid layui-word-aux">
                         填写字母、数字、下划线及其组合，为空不重写
                     </div>
                 </div>
             </div>
+            {/if}
             
             <div class="layui-form-item">
                 <label class="layui-form-label">

@@ -34,11 +34,6 @@ function cms_themes($path = null) {
 function cms_assets($path = null) {
     $root = config('cms.assets_url', '');
     
-    $theme = SettingsModel::config('web_theme', 'default');
-    if (! empty($theme)) {
-        $root .= '/' . $theme;
-    }
-    
     return $root . ($path ? '/' . ltrim($path, '/') : $path);
 }
 
@@ -56,13 +51,16 @@ function cms_cate_url($catename) {
     if (is_int($catename)) {
         $url = laket_route('cms.cate', [
             'cateid' => $catename, 
-            'page' => '[PAGE]',
         ]);
     } else {
-        $url = laket_route('cms.cate', [
-            'catename' => $catename, 
-            'page' => '[PAGE]',
-        ]);
+        $name = app('route')->getName('cms.cate-'.$catename);
+        if (! empty($name)) {
+            $url = laket_route('cms.cate-'.$catename);
+        } else {
+            $url = laket_route('cms.cate', [
+                'catename' => $catename, 
+            ]);
+        }
     }
     
     return $url;
@@ -78,10 +76,17 @@ function cms_content_url($catename, $contentid) {
             'id' => $contentid,
         ]);
     } else {
-        $url = laket_route('cms.content', [
-            'catename' => $catename, 
-            'id' => $contentid,
-        ]);
+        $name = app('route')->getName('cms.content-'.$catename);
+        if (! empty($name)) {
+            $url = laket_route('cms.content-'.$catename, [
+                'id' => $contentid,
+            ]);
+        } else {
+            $url = laket_route('cms.content', [
+                'catename' => $catename, 
+                'id' => $contentid,
+            ]);
+        }
     }
     
     return $url;
@@ -96,9 +101,14 @@ function cms_page_url($catename) {
             'cateid' => $catename, 
         ]);
     } else {
-        $url = laket_route('cms.page', [
-            'catename' => $catename, 
-        ]);
+        $name = app('route')->getName('cms.page-'.$catename);
+        if (! empty($name)) {
+            $url = laket_route('cms.page-'.$catename);
+        } else {
+            $url = laket_route('cms.page', [
+                'catename' => $catename, 
+            ]);
+        }
     }
     
     return $url;

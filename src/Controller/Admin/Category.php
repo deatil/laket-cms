@@ -35,9 +35,9 @@ class Category extends Base
                 ->toArray();
             foreach ($result as $key => $item) {
                 if ($item['type'] == 1) {
-                    $result[$key]['url'] = laket_route('cms.cate', ['catename' => $item['name']]);
+                    $result[$key]['url'] = cms_cate_url($item['name']);
                 } else {
-                    $result[$key]['url'] = laket_route('cms.page', ['catename' => $item['name']]);
+                    $result[$key]['url'] = cms_page_url($item['name']);
                 }
             }
             
@@ -76,9 +76,9 @@ class Category extends Base
                 ->count();
             foreach ($data as $key => $item) {
                 if ($item['type'] == 1) {
-                    $data[$key]['url'] = laket_route('cms.cate', ['cateid' => $item['id']]);
+                    $data[$key]['url'] = cms_cate_url($item['name']);
                 } else {
-                    $data[$key]['url'] = laket_route('cms.page', ['cateid' => $item['id']]);
+                    $data[$key]['url'] = cms_page_url($item['name']);
                 }
             }
 

@@ -4,6 +4,7 @@ declare (strict_types = 1);
 
 namespace Laket\Admin\CMS\Model;
 
+use think\facade\Cache;
 use think\Model as BaseModel;
 
 use Laket\Admin\Support\Tree;
@@ -157,6 +158,7 @@ class Category extends BaseModel
         
         $Tree = new Tree();
         $list = $Tree->withData($result)->buildArray($id);
+        
         return $list;
     }
     
@@ -173,5 +175,26 @@ class Category extends BaseModel
         
         return $ids;
     }
-
+    
+    /**
+     * 获取全部启用列表
+     */
+    public static function getAll()
+    {
+        $cacheId = 'cms_cate_cahce';
+        
+        $list = Cache::get($cacheId);
+        if (! $list) {
+            $list = static::where([
+                    ['status', '=', 1],
+                ])
+                ->order('sort ASC')
+                ->select()
+                ->toArray();
+            
+            Cache::set($cacheId, $list, 10080);
+        }
+        
+        return $list;
+    }
 }

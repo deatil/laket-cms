@@ -254,10 +254,7 @@ class Content extends Base
             $total = $queryCount->count();
             
             foreach ($data as $key => $item) {
-                $data[$key]['url'] = (string) url('lakecms/content/index', [
-                    'catename' => $cate['name'],
-                    'id' => $item['id'],
-                ]);
+                $data[$key]['url'] = cms_content_url($cate['name'], $item['id']);
             }
 
             $result = [
