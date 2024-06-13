@@ -6,7 +6,7 @@
     <ul> 
         {cates field="id,parentid,name,title,sort" limit="6" order="sort ASC" condition="parentid=10" return="data"}
             <li>
-                <a href="{:url('cms.cate', ['catename' => $data['name']])}" target="_self" class="ccsl">
+                <a href="{:cms_cate_url($data['name'])}" target="_self" class="ccsl">
                     {$data.title}
                 </a>
             </li>

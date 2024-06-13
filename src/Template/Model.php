@@ -937,9 +937,13 @@ class Model
         // 总数
         $total = $data->total();
         
+        // 分页
+        $pageHtml = $data->render();
+        
         return [
             'list' => $list, 
             'total' => $total,
+            'page' => $pageHtml,
         ];
     }
     
@@ -973,10 +977,7 @@ class Model
         
         $info = TagsModel::field($field)
             ->where(function($query) use($name, $title) {
-                $query->whereOr([
-                        'name' => $name,
-                    ])
-                    ->whereOr([
+                $query->where([
                         'title' => $title,
                     ]);
             })
@@ -992,11 +993,8 @@ class Model
         // 添加阅读量
         if (! empty($viewinc)) {
             TagsModel::where($map)
-                ->whereOr([
+                ->where([
                     'title' => $title,
-                ])
-                ->whereOr([
-                    'name' => $name,
                 ])
                 ->inc('views', 1)
                 ->update();
@@ -1051,13 +1049,13 @@ class Model
         // 解析地址参数
         parse_str($query, $newQuery);
         
-        $result = new PaginatorPage([], 1, $page, $total, $simple, [
+        $result = new PaginatorPage([], 10, $page, $total, $simple, [
             'path' => $url, 
             'query' => $newQuery,
             'simple' => $simple,
         ]);
         
-        return "<div class='pager lakecms-page'>" . $result->render() . "</div>";
+        return "<div class='pager laketcms-page'>" . $result->render() . "</div>";
     }
     
     /**

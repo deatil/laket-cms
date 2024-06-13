@@ -6,6 +6,7 @@ namespace Laket\Admin\CMS\Controller\CMS;
 
 use think\App;
 use think\Response;
+use think\Validate;
 use think\facade\View;
 
 use Laket\Admin\CMS\Service\Template;

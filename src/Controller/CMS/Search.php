@@ -21,13 +21,14 @@ class Search extends Base
 {
     /**
      * 详情
+     * /cms/search?cateid=7&keywords=动态
      */
     public function index()
     {
         // 功能开启检测
         $openSearch = SettingsModel::config('web_site_search', 0);
         if ($openSearch != 1) {
-            $this->error('页面不能存在！');
+            return $this->error('页面不能存在！');
         }
         
         // 分类
@@ -50,7 +51,7 @@ class Search extends Base
             'keywords|关键词' => 'require|chsDash|max:25',
         ]);
         if (true !== $result) {
-            $this->error($result);
+            return $this->error($result);
         }
         
         if ($time == 'day') {
@@ -74,7 +75,7 @@ class Search extends Base
             'id' => $cateid,
         ])->find();
         if (empty($cate)) {
-            $this->error('选择分类错误');
+            return $this->error('选择分类错误');
         }
         
         $modelid = $cate['modelid'];
@@ -84,7 +85,7 @@ class Search extends Base
             'status' => 1,
         ])->find();
         if (empty($model)) {
-            $this->error('分类错误');
+            return $this->error('分类错误');
         }
         
         $searchField = ModelFieldModel::where('modelid', $modelid)
@@ -92,7 +93,7 @@ class Search extends Base
             ->where('status', 1)
             ->column('name');
         if (empty($searchField)) {
-            $this->error('没有设置搜索字段');
+            return $this->error('没有设置搜索字段');
         }
         
         $where = '';
@@ -124,7 +125,7 @@ class Search extends Base
         $data = $data->toArray();
         
         $this->assign([
-            'data' => $data['data'],
+            'list' => $data['data'],
             'page' => $page,
             'total' => $total,
         ]);

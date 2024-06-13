@@ -11,7 +11,7 @@
     <div class="tag-item {$data.name}">
         {$data.id} <br />
         {$data.name}: 
-        <a href="{:url('cms.tag', ['title' => $data['title']])}" target="_blank">
+        <a href="{:cms_tag_detail_url($data['title'])}" target="_blank">
             {$data.title}
         </a>
     </div>
@@ -19,7 +19,7 @@
 </div>
 
 <ul class="tag-page">
-    {$page}
+    {$page|raw}
 </ul>
 
 {/block}

@@ -22,19 +22,20 @@ class Tag extends Base
     protected function initialize()
     {
         parent::initialize();
-        
-        // 功能开启检测
-        $openTag = SettingsModel::config('web_site_tag', 0);
-        if ($openTag != 1) {
-            $this->error('页面不能存在！');
-        }
     }
 
     /**
      * 列表
+     * /cms/tag
      */
     public function index()
     {
+        // 功能开启检测
+        $openTag = SettingsModel::config('web_site_tag', 0);
+        if ($openTag != 1) {
+            return $this->error('页面不能存在！');
+        }
+
         // 页码
         $page = $this->request->param('page/d', 1);
         
@@ -56,10 +57,17 @@ class Tag extends Base
             'limit' => $limit,
             'order' => $order,
         ]);
+
+        $pageHtml = TemplateModel::getPagerHtml([
+            'url' => $this->request->baseUrl(),
+            'page' => $page,
+            'total' => $data['total'],
+        ]);
         
         $this->assign([
             'list' => $data['list'],
             'total' => $data['total'],
+            'page' => $pageHtml,
         ]);
         
         // SEO信息
@@ -74,9 +82,16 @@ class Tag extends Base
     
     /**
      * 详情
+     * /cms/tag/测试
      */
     public function detail()
     {
+        // 功能开启检测
+        $openTag = SettingsModel::config('web_site_tag', 0);
+        if ($openTag != 1) {
+            return $this->error('页面不能存在！');
+        }
+
         // 名称
         $title = $this->request->param('title/s');
         
@@ -86,11 +101,11 @@ class Tag extends Base
             'viewinc' => 1,
         ]);
         if (empty($data)) {
-            return $this->error($title . '标签不存在');
+            return $this->error($title . '标签不存在', '');
         }
         
         $this->assign([
-            'data' => $data
+            'info' => $data,
         ]);
         
         // SEO信息

@@ -17,8 +17,8 @@ function cms_config($key = null, $default = null) {
 /**
  * 当前主题目录
  */
-function cms_theme_path() {
-    return Template::themePath();
+function cms_theme_path($path = '') {
+    return Template::themePath($path);
 }
 
 /**
@@ -100,6 +100,17 @@ function cms_page_url($catename) {
             'catename' => $catename, 
         ]);
     }
+    
+    return $url;
+}
+
+/**
+ * 标签详情链接
+ */
+function cms_tag_detail_url($title) {
+    $url = laket_route('cms.tag-detail', [
+        'title' => $title, 
+    ]);
     
     return $url;
 }
