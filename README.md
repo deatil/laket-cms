@@ -11,7 +11,7 @@
 *  composer安装
     * `composer require laket/laket-cms`
 *  本地安装
-    *  手动将模块上传到 `/flashs/laket/laket-cms` 目录
+    *  手动将插件上传到 `/flashs/laket/laket-cms` 目录
 *  最后在 `系统管理->闪存插件->全部` 安装添加的插件
 *  安装后配置文件位置: `/config/cms.php`
 *  安装后模版主题位置: `/view/laket-cms/template`
