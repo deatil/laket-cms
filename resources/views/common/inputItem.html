@@ -532,7 +532,10 @@
                 {/if}
             </label>
             <div class="layui-form-field-label">
-                <textarea placeholder="请输入{$vo.title}" id="editor" class="layui-textarea cms-inputitem-editor js-ueditor" name="{$vo.fieldArr}[{$vo.name}]">{$vo.value}</textarea>
+                <textarea placeholder="请输入{$vo.title}"
+                    id="editor_{$vo.name}" 
+                    class="layui-textarea cms-inputitem-editor js-ueditor" 
+                    name="{$vo.fieldArr}[{$vo.name}]">{$vo.value}</textarea>
             </div>
             {if $vo.remark}
                 <div class="layui-form-mid layui-word-aux">
