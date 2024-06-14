@@ -532,7 +532,7 @@
                 {/if}
             </label>
             <div class="layui-form-field-label">
-                <textarea placeholder="请输入{$vo.title}" class="layui-textarea cms-inputitem-editor" name="{$vo.fieldArr}[{$vo.name}]">{$vo.value}</textarea>
+                <textarea placeholder="请输入{$vo.title}" id="editor" class="layui-textarea cms-inputitem-editor js-ueditor" name="{$vo.fieldArr}[{$vo.name}]">{$vo.value}</textarea>
             </div>
             {if $vo.remark}
                 <div class="layui-form-mid layui-word-aux">
@@ -548,12 +548,15 @@
     {:laket_runhook('cms_input_item_end', $vo)}
 
 {/volist}
+
 <script type="text/javascript" src="{:laket_assets('js/webuploader/webuploader.min.js')}"></script>
 <link rel="stylesheet" href="{:laket_assets('js/webuploader/webuploader.css')}">
 
 <script type="text/javascript" src="{:laket_assets('js/Sortable.js')}"></script>
 <script type="text/javascript" src="{:laket_assets('js/viewer/viewer.min.js')}"></script>
 <link rel="stylesheet" href="{:laket_assets('js/viewer/viewer.min.css')}">
+
+{:laket_runhook('cms_input_item_js', $vo)}
 
 <script type="text/javascript">
 $('.uploader-list').each(function () {
