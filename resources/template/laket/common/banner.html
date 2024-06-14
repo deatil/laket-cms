@@ -1,6 +1,6 @@
 <div class="banner">
     <div class="b-img">
-        {volist name=":laket_runhook('banner')" id="banner"}
+        {volist name=":apply_filters('banner')" id="banner"}
             <img src="{$banner.content}" width="100%" alt="{$banner.title}"/>
         {/volist}
     </div>

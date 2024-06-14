@@ -6,7 +6,7 @@ use Laket\Admin\Facade\Flash;
 use Laket\Admin\CMS\Model\Category as CategoryModel;
 use Laket\Admin\CMS\Controller\CMS as CMSController;
 
-laket_runhook('cms_route_before');
+do_action('cms_route_before');
 
 // 自定义路由
 $cates = CategoryModel::getAll();
@@ -55,5 +55,5 @@ Route::group("cms", function() {
         ]);
 });
 
-laket_runhook('cms_route_after');
+do_action('cms_route_after');
 
