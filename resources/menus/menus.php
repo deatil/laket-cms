@@ -3,7 +3,7 @@ return [
     "title" => "内容管理",
     "url" => "cms/index",
     "method" => "GET",
-    "slug" => $this->slug,
+    "slug" => $slug,
     "icon" => "icon-shiyongwendang",
     "menu_show" => 1,
     "listorder" => 1035,

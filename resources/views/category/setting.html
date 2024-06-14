@@ -16,8 +16,8 @@
                                 class="uploader-cover">
                                 {notempty name="$info.cover"}
                                 <div class="file-item thumbnail">
-                                    <img data-original="{$info.cover|laket_attachment_url|default='admin/img/none.png'}" 
-                                        src="{$info.cover|laket_attachment_url|default='admin/img/none.png'}" 
+                                    <img data-original="{$info.cover|laket_attachment_url|default=laket_assets('img/none.png')}" 
+                                        src="{$info.cover|laket_attachment_url|default=laket_assets('img/none.png')}" 
                                         width="100" 
                                         style="max-height: 100px;">
                                     <i class="iconfont icon-delete_fill remove-picture" 
@@ -226,10 +226,10 @@
 {/block}
 
 {block name="script"}
-<script type="text/javascript" src="admin/js/webuploader/webuploader.min.js"></script>
-<link rel="stylesheet" href="admin/js/webuploader/webuploader.css">
-<script type="text/javascript" src="admin/js/viewer/viewer.min.js"></script>
-<link rel="stylesheet" href="admin/js/viewer/viewer.min.css">
+<script type="text/javascript" src="{:laket_assets('js/webuploader/webuploader.min.js')}"></script>
+<link rel="stylesheet" href="{:laket_assets('js/webuploader/webuploader.css')}">
+<script type="text/javascript" src="{:laket_assets('js/viewer/viewer.min.js')}"></script>
+<link rel="stylesheet" href="{:laket_assets('js/viewer/viewer.min.css')}">
 
 <script type="text/javascript">
 $('.uploader-cover').viewer();

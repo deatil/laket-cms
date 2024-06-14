@@ -58,7 +58,8 @@
                                     <div id="file_list_web_site_logo" class="uploader-logo">
                                         {notempty name="$setting.web_site_logo"}
                                         <div class="file-item thumbnail">
-                                            <img data-original="{$setting.web_site_logo|laket_attachment_url|default='admin/img/none.png'}" src="{$setting.web_site_logo|laket_attachment_url|default='admin/img/none.png'}" width="100" style="max-height: 100px;">
+                                            <img data-original="{$setting.web_site_logo|laket_attachment_url|default=laket_assets('img/none.png')}" 
+                                                src="{$setting.web_site_logo|laket_attachment_url|default=laket_assets('img/none.png')}" width="100" style="max-height: 100px;">
                                             <i class="iconfont icon-delete_fill remove-picture" data-id="{$setting.web_site_logo}"></i>
                                         </div>
                                         {/notempty}
@@ -179,10 +180,10 @@
     </div>
 </div>
 
-<script type="text/javascript" src="admin/js/webuploader/webuploader.min.js"></script>
-<link rel="stylesheet" href="admin/js/webuploader/webuploader.css">
-<script type="text/javascript" src="admin/js/viewer/viewer.min.js"></script>
-<link rel="stylesheet" href="admin/js/viewer/viewer.min.css">
+<script type="text/javascript" src="{:laket_assets('js/webuploader/webuploader.min.js')}"></script>
+<link rel="stylesheet" href="{:laket_assets('js/webuploader/webuploader.css')}">
+<script type="text/javascript" src="{:laket_assets('js/viewer/viewer.min.js')}"></script>
+<link rel="stylesheet" href="{:laket_assets('js/viewer/viewer.min.css')}">
 
 <script type="text/javascript">
 $(function () {

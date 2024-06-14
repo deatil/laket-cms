@@ -22,7 +22,7 @@
 <script type="text/javascript">
 layui.config({
     version: "{:config('lake.release')}",
-    base: 'admin/libs/layui-extend/'
+    base: "{:laket_assets('js/layui-extend/')}"
 }).use(['form', 'layer', 'notice'], function() {
     $('.ajax-post').on('click', function(e) {
         var form = layui.form,
