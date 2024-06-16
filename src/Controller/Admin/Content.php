@@ -30,7 +30,7 @@ class Content extends Base
         $cate = CategoryModel::where([
                 ['status', '=', 1], 
             ])
-            ->order("sort ASC, id DESC")
+            ->order("sort DESC, id DESC")
             ->select()
             ->toArray();
         

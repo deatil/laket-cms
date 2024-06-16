@@ -28,8 +28,8 @@ class Category extends Base
         if ($this->request->isAjax()) {
             $result = CategoryModel::with(['model'])
                 ->order([
-                    'sort' => 'ASC', 
-                    'id' => 'ASC',
+                    'sort' => 'DESC', 
+                    'id' => 'DESC',
                 ])
                 ->select()
                 ->toArray();
@@ -68,7 +68,10 @@ class Category extends Base
             
             $data = CategoryModel::with(['model'])
                 ->where($map)
-                ->order("id DESC")
+                ->order([
+                    'sort' => 'DESC', 
+                    'id' => 'DESC',
+                ])
                 ->page($page, $limit)
                 ->select()
                 ->toArray();

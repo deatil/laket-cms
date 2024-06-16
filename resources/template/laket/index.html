@@ -62,7 +62,7 @@
         {contents field="id,title,cover,views,categoryid" catename="product" limit="4" order="views DESC" inchildren='inchildren' return="data"}
         <li>
             <a href="{:cms_content_url($data['cate']['name'], $data['id'])}">
-              <img src="{$data.cover}" width="280" height="280"/>
+              <img src="{$data.cover|default=''}" width="280" height="280"/>
               <p class="ccsl">{$data.title}</p>
           </a>
         </li>

@@ -27,7 +27,7 @@ class Model extends Base
             $map = $this->buildparams();
             
             $data = ModelModel::where($map)
-                ->order("sort ASC, id DESC")
+                ->order("sort DESC, id DESC")
                 ->page($page, $limit)
                 ->select()
                 ->toArray();

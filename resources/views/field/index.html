@@ -98,7 +98,15 @@ layui.use(['table', 'notice'], function() {
     });
     
     $('body').on('click', '.js-reload-btn', function () {
-        location.reload();
+        table.reload("table", {
+            page: {
+                curr: 1
+            },
+            where: {
+                search_field: '',
+                keyword: '',
+            }
+        });
     });
     
 });

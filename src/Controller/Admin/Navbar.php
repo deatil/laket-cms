@@ -24,8 +24,8 @@ class Navbar extends Base
     {
         if ($this->request->isAjax()) {
             $result = NavbarModel::order([
-                    'sort' => 'ASC', 
-                    'id' => 'ASC',
+                    'sort' => 'DESC', 
+                    'id' => 'DESC',
                 ])
                 ->select()
                 ->toArray();
@@ -58,7 +58,10 @@ class Navbar extends Base
             $map = $this->buildparams();
             
             $data = NavbarModel::where($map)
-                ->order("id DESC")
+                ->order([
+                    'sort' => 'DESC', 
+                    'id' => 'DESC',
+                ])
                 ->page($page, $limit)
                 ->select()
                 ->toArray();

@@ -189,7 +189,7 @@ class Content extends BaseModel
                     $value['value'] = date('Y-m-d H:i:s', (int) $info[$value['name']]);
                 }
 
-                if ($value['type'] == 'Ueditor') {
+                if ($value['type'] == 'editor') {
                     $value['value'] = htmlspecialchars_decode($value['value']);
                 }
             } else {

@@ -26,7 +26,10 @@ class Tags extends Base
             $map = $this->buildparams();
             
             $data = TagsModel::where($map)
-                ->order("id DESC")
+                ->order([
+                    'sort' => 'DESC', 
+                    'id' => 'DESC',
+                ])
                 ->page($page, $limit)
                 ->select()
                 ->toArray();

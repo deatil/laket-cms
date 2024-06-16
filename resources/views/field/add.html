@@ -42,11 +42,23 @@
                 </label>
                 <div class="layui-input-block w500">
                     <select name="type" lay-filter="fieldtype" lay-verify="required">
-                        <option></option>
+                        <option data-define="无提示" 
+                            data-ifoption=""
+                            data-ifstring=""></option>
                         {volist name="fieldType" id="vo"}
-                            <option value="{$vo.name}" data-define="{$vo.default_define}" data-ifoption="{$vo.ifoption}" data-ifstring="{$vo.ifstring}">{$vo.title}</option>
+                            <option value="{$vo.name}" 
+                                data-define="{$vo.default_define}" 
+                                data-ifoption="{$vo.ifoption}" 
+                                data-ifstring="{$vo.ifstring}"
+                            >{$vo.title}[{$vo.name}]</option>
                         {/volist}
                     </select>
+                </div>
+                <div class="layui-input-block">
+                    <div class="layui-form-mid layui-word-aux">
+                        选择字段类型, 类型 SQL 提示: 
+                        <span class="layui-badge layui-bg-green js-fieldtype-tip">无提示</span>
+                    </div>
                 </div>
             </div>
             
@@ -214,7 +226,7 @@
                     <input type="radio" name="is_list_show" value="0" title="否" checked>
                 </div>
                 <div class="layui-input-block">
-                    <div class="layui-form-mid layui-word-aux">是否在列表显示，主要用于api</div>
+                    <div class="layui-form-mid layui-word-aux">是否在列表显示</div>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -224,7 +236,7 @@
                     <input type="radio" name="is_detail_show" value="0" title="否" checked>
                 </div>
                 <div class="layui-input-block">
-                    <div class="layui-form-mid layui-word-aux">是否在详情显示，主要用于api</div>
+                    <div class="layui-form-mid layui-word-aux">是否在详情显示</div>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -271,8 +283,11 @@ layui.use(['layer', 'form'], function() {
         form = layui.form;
     
     form.on('select(fieldtype)', function(data) {
-        var ifoption = $(data.elem).find("option:selected").data("ifoption");
-        var ifstring = $(data.elem).find("option:selected").data("ifstring");
+        var thiz = $(data.elem).find("option:selected");
+        
+        var define = thiz.data("define");
+        var ifoption = thiz.data("ifoption");
+        var ifstring = thiz.data("ifstring");
         
         // 搜索隐显
         if (ifstring == 1) {
@@ -286,17 +301,18 @@ layui.use(['layer', 'form'], function() {
         } else {
             $('#options').hide();
         }
+        
+        $('.js-fieldtype-tip').html(define);
     });
     
     form.on('select(validate_rule)', function(data) {
-        var new_rule = $(data.elem).find("option:selected").data("define");
-        
-        var validate_rule = $('[name="validate_rule"]');
-        validate_rule.append(new_rule);
+        var rule = $(data.elem).find("option:selected").data("define");
+        $('[name="validate_rule"]').append(rule);
     });
     
     form.on('select(validate_regex)', function(data) {
-        $('[name="validate_rule"]').append($(data.elem).find("option:selected").attr("data-define"));
+        var rule = $(data.elem).find("option:selected").attr("data-define");
+        $('[name="validate_rule"]').append(rule);
     });
 });
 </script>
