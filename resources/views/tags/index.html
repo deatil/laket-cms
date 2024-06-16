@@ -30,16 +30,45 @@
 
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <a class="layui-btn layui-btn-sm layui-iframe" href="{:laket_route('admin.cms.tags-add')}" title="添加标签">添加标签</a>
+        {if laket_auth(['admin.cms.tags-add'])}
+            <a class="layui-btn layui-btn-sm layui-iframe" href="{:laket_route('admin.cms.tags-add')}" title="添加标签">添加标签</a>
+        {else}
+            <a href='javascript:;' class="layui-btn layui-btn-sm layui-btn-disabled">添加标签</a>
+        {/if}
+        
     </div>
 </script>
+
 <script type="text/html" id="actionTpl">
-    <a href='{:laket_route("admin.cms.tags-edit")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑标签【{{ d.title }}】">编辑</a>
-    <a href='{:laket_route("admin.cms.tags-delete")}?id={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+    {if laket_auth(['admin.cms.tags-edit'])}
+        <a href='{:laket_route("admin.cms.tags-edit")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑标签【{{ d.title }}】">编辑</a>
+    {else}
+        <a href='javascript:;' class="layui-btn layui-btn-xs layui-btn-disabled">编辑</a>
+    {/if}
+
+    {if laket_auth(['admin.cms.tags-delete'])}
+        <a href='{:laket_route("admin.cms.tags-delete")}?id={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+    {/if}
+
 </script>
 
 <script type="text/html" id="statusTpl">
-    <input type="checkbox" name="status" data-href="{:laket_route('admin.cms.tags-state')}?id={{d.id}}" value="{{d.id}}" lay-skin="switch" lay-text="开启|关闭" lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}>
+    {if laket_auth(['admin.cms.tags-state'])}
+        <input type="checkbox" 
+            name="status" 
+            data-href="{:laket_route('admin.cms.tags-state')}?id={{d.id}}" 
+            value="{{d.id}}" 
+            lay-skin="switch" 
+            lay-text="开启|关闭" 
+            lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}>
+    {else}
+        <input type="checkbox" 
+            disabled
+            lay-skin="switch" 
+            lay-text="开启|关闭" 
+            lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}
+            >
+    {/if}
 </script>
 
 <script type="text/html" id="createTimeTpl">

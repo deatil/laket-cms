@@ -11,7 +11,7 @@
                     &nbsp;<font color="red">*</font>
                 </label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="title" value="{$info.title}" lay-verify="required" autocomplete="off" placeholder="标签标题" class="layui-input">
+                    <input type="text" name="title" value="{$info.title|default=''}" lay-verify="required" autocomplete="off" placeholder="标签标题" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">标签中文名称</div>
@@ -23,7 +23,7 @@
                     名称
                 </label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="name" value="{$info.name}" autocomplete="off" placeholder="标签名称" class="layui-input">
+                    <input type="text" name="name" value="{$info.name|default=''}" autocomplete="off" placeholder="标签名称" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">
@@ -37,7 +37,7 @@
                     关键字
                 </label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="keywords" value="{$info.keywords}" autocomplete="off" placeholder="关键字" class="layui-input">
+                    <input type="text" name="keywords" value="{$info.keywords|default=''}" autocomplete="off" placeholder="关键字" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">
@@ -49,7 +49,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">描述</label>
                 <div class="layui-input-block w500">
-                    <textarea name="description" placeholder="标签的相关描述" class="layui-textarea">{$info.description}</textarea>
+                    <textarea name="description" placeholder="标签的相关描述" class="layui-textarea">{$info.description|default=''}</textarea>
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">

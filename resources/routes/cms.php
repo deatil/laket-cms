@@ -3,6 +3,7 @@
 use think\facade\Route;
 
 use Laket\Admin\Facade\Flash;
+use Laket\Admin\CMS\Model\Settings as SettingsModel;
 use Laket\Admin\CMS\Model\Category as CategoryModel;
 use Laket\Admin\CMS\Controller\CMS as CMSController;
 
@@ -39,8 +40,14 @@ foreach ($cates as $c) {
     }
 }
 
-Route::group("cms", function() {
+$useHome = SettingsModel::config('web_site_home', 0);
+if ($useHome == 1) {
     Route::get('/', CMSController\Index::class . '@index')->name('cms.index');
+} else {
+    Route::get('/cms', CMSController\Index::class . '@index')->name('cms.index');
+}
+
+Route::group("cms", function() {
     Route::get('/cate/:catename', CMSController\Cate::class . '@index')->name('cms.cate');
     Route::get('/content/:catename/:id', CMSController\Content::class . '@index')->name('cms.content');
     Route::get('/page/:catename', CMSController\Page::class . '@index')->name('cms.page');

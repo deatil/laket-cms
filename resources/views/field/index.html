@@ -28,7 +28,10 @@
 
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <a class="layui-btn layui-btn-sm layui-btn-normal layui-iframe" href="{:laket_route('admin.cms.field-add', ['modelid' => $modelid])}" title="添加字段">添加字段</a>
+        {if laket_auth(['admin.cms.field-add'])}
+            <a class="layui-btn layui-btn-sm layui-btn-normal layui-iframe" href="{:laket_route('admin.cms.field-add', ['modelid' => $modelid])}" title="添加字段">添加字段</a>
+        {/if}
+        
         <a class="layui-btn layui-btn-sm js-reload-btn" href="javascript:;" title="刷新">刷新</a>
     </div>
 </script>
@@ -44,12 +47,36 @@
 </script>
 
 <script type="text/html" id="switchTpl">
-    <input type="checkbox" name="status" data-href="{:laket_route('admin.cms.field-state')}?id={{d.id}}" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}>
+    {if laket_auth(['admin.cms.field-state'])}
+        <input type="checkbox" 
+            name="status" 
+            data-href="{:laket_route('admin.cms.field-state')}?id={{d.id}}" 
+            value="{{d.id}}" 
+            lay-skin="switch" 
+            lay-text="开启|关闭" 
+            lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}>
+    {else}
+        <input type="checkbox" 
+            disabled
+            lay-skin="switch" 
+            lay-text="开启|关闭" 
+            lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}
+            >
+    {/if}
 </script>
+
 <script type="text/html" id="barTool">
-    <a href='{:laket_route("admin.cms.field-edit")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑字段【{{ d.name }}】">编辑</a>
-    <a href='{:laket_route("admin.cms.field-delete")}?id={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+    {if laket_auth(['admin.cms.field-edit'])}
+        <a href='{:laket_route("admin.cms.field-edit")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑字段【{{ d.name }}】">编辑</a>
+    {else}
+        <a href='javascript:;' class="layui-btn layui-btn-xs layui-btn-disabled">编辑</a>
+    {/if}
+
+    {if laket_auth(['admin.cms.field-delete'])}
+        <a href='{:laket_route("admin.cms.field-delete")}?id={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+    {/if}
 </script>
+
 <script type="text/html" id="createTimeTpl">
     {{ layui.util.toDateString(d.add_time * 1000) }}
 </script>

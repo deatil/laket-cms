@@ -10,19 +10,54 @@
 
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <a class="layui-btn layui-btn-sm layui-iframe" href="{:laket_route('admin.cms.navbar-add')}" title="添加导航">添加导航</a>
+        {if laket_auth(['admin.cms.navbar-add'])}
+            <a class="layui-btn layui-btn-sm layui-iframe" href="{:laket_route('admin.cms.navbar-add')}" title="添加导航">添加导航</a>
+        {/if}
+        
         <a class="layui-btn layui-btn-sm layui-btn-normal" id="openAll">展开/折叠</a>
-        <a class="layui-btn layui-btn-sm" href="{:laket_route('admin.cms.navbar-all')}">全部导航</a>
+
+        {if laket_auth(['admin.cms.navbar-all'])}
+            <a class="layui-btn layui-btn-sm" href="{:laket_route('admin.cms.navbar-all')}">全部导航</a>
+        {else}
+            <a class="layui-btn layui-btn-sm layui-btn-disabled" href='javascript:;'>全部导航</a>
+        {/if}
     </div>
 </script>
+
 <script type="text/html" id="actionTpl">
-    <a href="{:laket_route('admin.cms.navbar-add')}?parentid={{ d.id }}" class="layui-btn layui-btn-xs layui-btn-normal layui-iframe" title="添加导航">添加</a>
-    <a href='{:laket_route("admin.cms.navbar-edit")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑导航【{{ d.title }}】">编辑</a>
-    <a href='{:laket_route("admin.cms.navbar-delete")}?id={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+    {if laket_auth(['admin.cms.navbar-add'])}
+        <a href="{:laket_route('admin.cms.navbar-add')}?parentid={{ d.id }}" class="layui-btn layui-btn-xs layui-btn-normal layui-iframe" title="添加导航">添加</a>
+    {else}
+        <a href='javascript:;' class="layui-btn layui-btn-xs layui-btn-disabled">添加</a>
+    {/if}
+
+    {if laket_auth(['admin.cms.navbar-edit'])}
+        <a href='{:laket_route("admin.cms.navbar-edit")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑导航【{{ d.title }}】">编辑</a>
+    {/if}
+
+    {if laket_auth(['admin.cms.navbar-delete'])}
+        <a href='{:laket_route("admin.cms.navbar-delete")}?id={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+    {/if}
+
 </script>
 
 <script type="text/html" id="statusTpl">
-    <input type="checkbox" name="status" data-href="{:laket_route('admin.cms.navbar-state')}?id={{d.id}}" value="{{d.id}}" lay-skin="switch" lay-text="开启|关闭" lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}>
+    {if laket_auth(['admin.cms.navbar-state'])}
+        <input type="checkbox" 
+            name="status" 
+            data-href="{:laket_route('admin.cms.navbar-state')}?id={{d.id}}" 
+            value="{{d.id}}" 
+            lay-skin="switch" 
+            lay-text="开启|关闭" 
+            lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}>
+    {else}
+        <input type="checkbox" 
+            disabled
+            lay-skin="switch" 
+            lay-text="开启|关闭" 
+            lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}
+            >
+    {/if}
 </script>
 
 <script type="text/html" id="createTimeTpl">

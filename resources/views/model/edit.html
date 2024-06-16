@@ -11,7 +11,7 @@
                     &nbsp;<font color="red">*</font>
                 </label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="title" value="{$info.title}" lay-verify="required" autocomplete="off" placeholder="模型名称" class="layui-input">
+                    <input type="text" name="title" value="{$info.title|default=''}" lay-verify="required" autocomplete="off" placeholder="模型名称" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">模块中文名称</div>
@@ -24,7 +24,7 @@
                     &nbsp;<font color="red">*</font>
                 </label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="tablename" autocomplete="off" placeholder="表名称" class="layui-input" value="{$info.tablename}">
+                    <input type="text" name="tablename" autocomplete="off" placeholder="表名称" class="layui-input" value="{$info.tablename|default=''}">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">填写字符、数字、下划线及其组合，开头只能字符</div>
@@ -34,14 +34,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">描述</label>
                 <div class="layui-input-block w500">
-                    <textarea name="comment" placeholder="模型的相关描述" class="layui-textarea">{$info.comment}</textarea>
+                    <textarea name="comment" placeholder="模型的相关描述" class="layui-textarea">{$info.comment|default=''}</textarea>
                 </div>
             </div>
             
             <div class="layui-form-item">
                 <label class="layui-form-label">排序</label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="sort" value="{$info.sort}" autocomplete="off" placeholder="链接排序" class="layui-input">
+                    <input type="text" name="sort" value="{$info.sort|default='10'}" autocomplete="off" placeholder="链接排序" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">导航的链接排序，值越小越前</div>

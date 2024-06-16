@@ -47,7 +47,7 @@
                     &nbsp;<font color="red">*</font>
                 </label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="name" value="{$info.name}" lay-verify="required" autocomplete="off" placeholder="栏目标识" class="layui-input">
+                    <input type="text" name="name" value="{$info.name|default=''}" lay-verify="required" autocomplete="off" placeholder="栏目标识" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">填写字母、数字、下划线及其组合</div>
@@ -60,7 +60,7 @@
                     &nbsp;<font color="red">*</font>
                 </label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="title" value="{$info.title}" lay-verify="required" autocomplete="off" placeholder="栏目标题" class="layui-input">
+                    <input type="text" name="title" value="{$info.title|default=''}" lay-verify="required" autocomplete="off" placeholder="栏目标题" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">栏目中文名称</div>
@@ -72,7 +72,7 @@
                     关键字
                 </label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="keywords" value="{$info.keywords}" autocomplete="off" placeholder="关键字" class="layui-input">
+                    <input type="text" name="keywords" value="{$info.keywords|default=''}" autocomplete="off" placeholder="关键字" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">栏目的关键字，半角逗号隔开</div>
@@ -82,7 +82,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">描述</label>
                 <div class="layui-input-inline w500">
-                    <textarea name="description" placeholder="栏目的相关描述" class="layui-textarea">{$info.description}</textarea>
+                    <textarea name="description" placeholder="栏目的相关描述" class="layui-textarea">{$info.description|default=''}</textarea>
                 </div>
             </div>
             
@@ -105,7 +105,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">排序</label>
                 <div class="layui-input-block w500">
-                    <input type="text" name="sort" value="{$info.sort}" autocomplete="off" placeholder="链接排序" class="layui-input">
+                    <input type="text" name="sort" value="{$info.sort|default='10'}" autocomplete="off" placeholder="链接排序" class="layui-input">
                 </div>
                 <div class="layui-input-block">
                     <div class="layui-form-mid layui-word-aux">栏目的链接排序，值越小越前</div>
@@ -120,7 +120,7 @@
                 </div>
             </div>
             
-            <input type="hidden" value="{$info.id}" name="id" />
+            <input type="hidden" value="{$info.id|default=''}" name="id" />
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="formSubmit" lay-close="self">立即提交</button>

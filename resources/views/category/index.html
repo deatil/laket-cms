@@ -10,27 +10,56 @@
 
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <a class="layui-btn layui-btn-sm layui-iframe" href="{:laket_route('admin.cms.category-add')}" title="添加栏目">添加栏目</a>
+        {if laket_auth(['admin.cms.category-add'])}
+            <a class="layui-btn layui-btn-sm layui-iframe" href="{:laket_route('admin.cms.category-add')}" title="添加栏目">添加栏目</a>
+        {/if}
+        
         <a class="layui-btn layui-btn-sm layui-btn-normal" id="openAll">展开/折叠</a>
-        <a class="layui-btn layui-btn-sm" href="{:laket_route('admin.cms.category-all')}">全部栏目</a>
+
+        {if laket_auth(['admin.cms.category-all'])}
+            <a class="layui-btn layui-btn-sm" href="{:laket_route('admin.cms.category-all')}">全部栏目</a>
+        {/if}
     </div>
 </script>
 <script type="text/html" id="actionTpl">
-    <a href='{:laket_route("admin.cms.category-setting")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-btn-normal layui-iframe" title="栏目设置【{{ d.title }}】">设置</a>
-    <a href="{:laket_route('admin.cms.category-add')}?parentid={{ d.id }}" class="layui-btn layui-btn-xs layui-btn-normal layui-iframe" title="添加栏目">添加</a>
-    <a href='{:laket_route("admin.cms.category-edit")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑栏目【{{ d.title }}】">编辑</a>
-    <a href='{:laket_route("admin.cms.category-delete")}?id={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+    {if laket_auth(['admin.cms.category-setting'])}
+        <a href='{:laket_route("admin.cms.category-setting")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-btn-normal layui-iframe" title="栏目设置【{{ d.title }}】">设置</a>
+    {/if}
+    
+    {if laket_auth(['admin.cms.category-add'])}
+        <a href="{:laket_route('admin.cms.category-add')}?parentid={{ d.id }}" class="layui-btn layui-btn-xs layui-btn-normal layui-iframe" title="添加栏目">添加</a>
+    {else}
+        <a href='javascript:;' class="layui-btn layui-btn-xs layui-btn-disabled">添加</a>
+    {/if}
+
+    {if laket_auth(['admin.cms.category-edit'])}
+        <a href='{:laket_route("admin.cms.category-edit")}?id={{ d.id }}' class="layui-btn layui-btn-xs layui-iframe" title="编辑栏目【{{ d.title }}】">编辑</a>
+    {/if}
+
+    {if laket_auth(['admin.cms.category-delete'])}
+        <a href='{:laket_route("admin.cms.category-delete")}?id={{ d.id }}' class="layui-btn layui-btn-danger layui-btn-xs layui-tr-del">删除</a>
+    {/if}
+
 </script>
 
 <script type="text/html" id="statusTpl">
-    <input type="checkbox" 
-        name="status" 
-        data-href="{:laket_route('admin.cms.category-state')}?id={{d.id}}" 
-        value="{{d.id}}" 
-        lay-skin="switch" 
-        lay-text="开启|关闭" 
-        lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}
-        >
+    {if laket_auth(['admin.cms.category-state'])}
+        <input type="checkbox" 
+            name="status" 
+            data-href="{:laket_route('admin.cms.category-state')}?id={{d.id}}" 
+            value="{{d.id}}" 
+            lay-skin="switch" 
+            lay-text="开启|关闭" 
+            lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}
+            >
+    {else}
+        <input type="checkbox" 
+            disabled
+            lay-skin="switch" 
+            lay-text="开启|关闭" 
+            lay-filter="switchStatus" {{ d.status==1 ? 'checked' : '' }}
+            >
+    {/if}
 </script>
 
 <script type="text/html" id="modelTpl">
