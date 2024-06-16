@@ -25,24 +25,24 @@
     <tr>
         <td width="50%">
             <center>
-                <img alt="LaketCMS" src="https://github.com/deatil/laket-cms/assets/24578855/00e24b77-d1fe-4bf2-85dd-1fd25bf83fef" />
+                <img alt="LaketCMS" src="https://github.com/deatil/laket-cms/assets/24578855/93ca82c8-7409-442c-960f-3859c8908aa9" />
             </center>
         </td>
         <td width="50%">
             <center>
-                <img alt="LaketCMS2" src="https://github.com/deatil/laket-cms/assets/24578855/ed4bccca-756c-446e-8155-57350e4b7167" />
+                <img alt="LaketCMS2" src="https://github.com/deatil/laket-cms/assets/24578855/a50255f0-9311-4d8f-a32c-8db073902888" />
             </center>
         </td>
     </tr>
     <tr>
         <td width="50%">
             <center>
-                <img alt="LaketCMS3" src="https://github.com/deatil/laket-cms/assets/24578855/658932e8-d9ef-4929-8e4b-de5091aaffb6" />
+                <img alt="LaketCMS3" src="https://github.com/deatil/laket-cms/assets/24578855/583a01da-237c-42e3-8895-68ad13410084" />
             </center>
         </td>
         <td width="50%">
             <center>
-                <img alt="LaketCMS4" src="https://github.com/deatil/laket-cms/assets/24578855/a1b4fd6a-b665-49a5-a076-31caf4a5956c" />
+                <img alt="LaketCMS4" src="https://github.com/deatil/laket-cms/assets/24578855/6b4f898c-c5fa-4098-bd9b-72b26c6497e5" />
             </center>
         </td>
     </tr>

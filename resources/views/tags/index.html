@@ -43,7 +43,7 @@
 </script>
 
 <script type="text/html" id="createTimeTpl">
-    {{ layui.util.toDateString(d.create_time * 1000) }}
+    {{ layui.util.toDateString(d.add_time * 1000) }}
 </script>
 {/block}
 
@@ -65,7 +65,7 @@ layui.use(['table', 'notice'], function() {
                 { field: 'title', title: '标题' },
                 { field: 'views', width:80, title: '点击', align: "center" },
                 { field: 'sort', width:80, title: '排序', align: "center", edit: 'text' },
-                { field: 'create_time', width:180, title: '创建时间', templet: '#createTimeTpl' },
+                { field: 'add_time', width:180, title: '创建时间', templet: '#createTimeTpl' },
                 { field: 'status', width: 100, title: '状态', align: "center", templet: '#statusTpl', unresize: true },
                 { fixed: 'right', title: '操作', width: 130, templet: '#actionTpl' }
             ]
