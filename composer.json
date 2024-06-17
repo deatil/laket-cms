@@ -29,7 +29,7 @@
     },
     "laket" : {
         "title": "CMS",
-        "version": "1.0.9",
+        "version": "1.0.10",
         "adaptation": "1.2.*"
     },
     "extra": {
