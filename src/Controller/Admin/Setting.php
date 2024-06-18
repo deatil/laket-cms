@@ -29,7 +29,7 @@ class Setting extends Base
             'web_site_tag' => 0,
             'web_site_search' => 0,
             'web_site_home' => 0,
-            // 'web_theme' => 'lake',
+            // 'web_theme' => 'laket',
     
             'web_site_logo' => '', // 网站LOGO
             'web_site_company' => '', // 公司名称

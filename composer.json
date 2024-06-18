@@ -1,12 +1,12 @@
 {
-    "name": "lake/laket-cms",
+    "name": "laket/laket-cms",
     "description": "CMS内容管理系统",
     "license": "Apache-2.0",
     "type": "library",
     "keywords": [
-        "lake",
+        "laket",
         "admin",
-        "lake-admin",
+        "laket-admin",
         "addon",
         "database"
     ],
@@ -29,7 +29,7 @@
     },
     "laket" : {
         "title": "CMS",
-        "version": "1.0.10",
+        "version": "1.0.11",
         "adaptation": "1.2.*"
     },
     "extra": {

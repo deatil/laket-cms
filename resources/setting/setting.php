@@ -23,8 +23,8 @@ return [
     'site_url' => '', // 站点URL
     'site_name' => 'laket-cms',
     'site_slogan' => 'cms内容管理系统',
-    'site_keywords' => 'lake-cms,CMS,lake,内容管理系统,CMS系统',
-    'site_description' => 'cms内容管理系统，基于lake-admin开发',
+    'site_keywords' => 'laket-cms,CMS,laket,内容管理系统,CMS系统',
+    'site_description' => 'cms内容管理系统，基于laket-admin开发',
     
     'site_cache_time' => '3600',
 ];
