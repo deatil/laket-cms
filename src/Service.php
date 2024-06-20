@@ -7,12 +7,10 @@ namespace Laket\Admin\CMS;
 use think\facade\Console;
 
 use Laket\Admin\Flash\Menu;
-use Laket\Admin\Facade\View;
 use Laket\Admin\Facade\Flash;
 use Laket\Admin\Flash\Service as BaseService;
 
 use Laket\Admin\CMS\Command;
-use Laket\Admin\CMS\Service\Template;
 use Laket\Admin\CMS\Service\Model as ModelService;
 use Laket\Admin\CMS\Model\Model as ModelModel;
 use Laket\Admin\CMS\Model\Settings as SettingsModel;
@@ -109,12 +107,6 @@ class Service extends BaseService
         // 注册视图标签
         $taglibs = config('cms.taglib_build_in', []);
         $this->registerViewTaglib($taglibs);
-        
-        // 设置视图公用参数
-        $viewPath = Template::themePath();
-        View::assign([
-            'cms_view_path' => $viewPath,
-        ]);
     }
     
     /**

@@ -62,12 +62,9 @@ abstract class Base
      */
     protected function initialize()
     {
-        $layoutFile = Template::themePath('layout.html');
-
         // seo相关信息
         $this->assign([
-            'meta'       => config('cms'),
-            'cms_layout' => $layoutFile,
+            'meta' => config('cms'),
         ]);
     }
 

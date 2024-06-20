@@ -4,7 +4,7 @@ declare (strict_types = 1);
 
 namespace Laket\Admin\CMS\Template\Taglib;
 
-use think\template\TagLib;
+use Laket\Admin\View\Laket\TagLib;
 
 use Laket\Admin\CMS\Template\Model;
 use Laket\Admin\CMS\Service\Template;
