@@ -7,8 +7,8 @@ namespace Laket\Admin\CMS\Controller\CMS;
 use think\App;
 use think\Response;
 use think\Validate;
-use think\facade\View;
 
+use Laket\Admin\Facade\View;
 use Laket\Admin\CMS\Service\Template;
 
 /**
@@ -163,17 +163,6 @@ abstract class Base
         if (! file_exists($template)) {
             $template = app('laket-admin.view-finder')->find($template);
         }
-        
-        // 配置视图标签
-        $viewTaglib = View::getConfig('taglib_build_in');
-
-        $viewTaglibs = explode(',', $viewTaglib);
-        $taglibs = (array) app('laket-admin.view-taglib')->getTaglibs();
-        
-        $newTaglibs = array_filter(array_merge($viewTaglibs, $taglibs));
-        View::config([
-            'taglib_build_in' => implode(',', $newTaglibs),
-        ]);
         
         return View::fetch($template, $vars);
     }

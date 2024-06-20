@@ -43,11 +43,13 @@ foreach ($cates as $c) {
 $useHome = SettingsModel::config('web_site_home', 0);
 if ($useHome == 1) {
     Route::get('/', CMSController\Index::class . '@index')->name('cms.index');
-} else {
-    Route::get('/cms', CMSController\Index::class . '@index')->name('cms.index');
 }
 
-Route::group("cms", function() {
+Route::group("cms", function() use($useHome) {
+    if ($useHome != 1) {
+        Route::get('/', CMSController\Index::class . '@index')->name('cms.index');
+    }
+    
     Route::get('/cate/:catename', CMSController\Cate::class . '@index')->name('cms.cate');
     Route::get('/content/:catename/:id', CMSController\Content::class . '@index')->name('cms.content');
     Route::get('/page/:catename', CMSController\Page::class . '@index')->name('cms.page');

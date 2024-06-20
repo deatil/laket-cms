@@ -4,10 +4,10 @@ declare (strict_types = 1);
 
 namespace Laket\Admin\CMS;
 
-use think\facade\View;
 use think\facade\Console;
 
 use Laket\Admin\Flash\Menu;
+use Laket\Admin\Facade\View;
 use Laket\Admin\Facade\Flash;
 use Laket\Admin\Flash\Service as BaseService;
 
