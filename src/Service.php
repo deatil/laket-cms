@@ -11,9 +11,10 @@ use Laket\Admin\Facade\Flash;
 use Laket\Admin\Flash\Service as BaseService;
 
 use Laket\Admin\CMS\Command;
-use Laket\Admin\CMS\Service\Model as ModelService;
 use Laket\Admin\CMS\Model\Model as ModelModel;
 use Laket\Admin\CMS\Model\Settings as SettingsModel;
+use Laket\Admin\CMS\Service\Model as ModelService;
+use Laket\Admin\CMS\Service\Template as TemplateService;
 
 class Service extends BaseService
 {
@@ -102,7 +103,10 @@ class Service extends BaseService
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laket-cms');
         
         // 前台模板位置
-        $this->loadViewsFrom(config('cms.template', ''), 'cms');
+        $this->loadViewsFrom(TemplateService::path(), 'cms');
+        
+        // 带主题信息模板
+        $this->loadViewsFrom(TemplateService::themePath(), 'cms_theme');
         
         // 注册视图标签
         $taglibs = config('cms.taglib_build_in', []);

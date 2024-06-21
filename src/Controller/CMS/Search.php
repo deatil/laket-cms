@@ -21,7 +21,7 @@ class Search extends Base
 {
     /**
      * 详情
-     * /cms/search?cateid=7&keywords=动态
+     * /cms/search?cname=company&keywords=动态
      */
     public function index()
     {
@@ -32,7 +32,7 @@ class Search extends Base
         }
         
         // 分类
-        $cateid = $this->request->param('cateid/d', 0);
+        $cname = $this->request->param('cname/s', 0);
         
         // 关键词
         $keywords = $this->request->param('keywords/s', '', 'trim,strip_tags,htmlspecialchars');
@@ -72,7 +72,7 @@ class Search extends Base
         }
 
         $cate = CategoryModel::where([
-            'id' => $cateid,
+            'name' => $cname,
         ])->find();
         if (empty($cate)) {
             return $this->error('选择分类错误');
@@ -135,8 +135,6 @@ class Search extends Base
         $this->setMetaKeywords($keywords);
         $this->setMetaDescription($keywords);
         
-        // 模版
-        $viewFile = Template::themePath('search.html');
-        return $this->fetch($viewFile);
+        return $this->fetchTheme('search.html');
     }
 }

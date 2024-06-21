@@ -75,9 +75,7 @@ class Tag extends Base
         $this->setMetaKeywords('标签,标签列表');
         $this->setMetaDescription('标签');
         
-        // 模版
-        $viewFile = Template::themePath('tag.html');
-        return $this->fetch($viewFile);
+        return $this->fetchTheme('tag.html');
     }
     
     /**
@@ -113,8 +111,6 @@ class Tag extends Base
         $this->setMetaKeywords($data['keywords']);
         $this->setMetaDescription($data['description']);
         
-        // 模版
-        $viewFile = Template::themePath('tag_detail.html');
-        return $this->fetch($viewFile);
+        return $this->fetchTheme('tag_detail.html');
     }
 }

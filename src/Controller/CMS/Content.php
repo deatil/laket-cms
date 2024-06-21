@@ -65,9 +65,6 @@ class Content extends Base
         $this->setMetaKeywords($info['keywords']);
         $this->setMetaDescription($info['description']);
         
-        // 模版
-        $viewFile = Template::themePath($cate['template_detail']);
-        
-        return $this->fetch($viewFile);
+        return $this->fetchTheme($cate['template_detail']);
     }
 }

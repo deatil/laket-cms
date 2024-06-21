@@ -67,9 +67,6 @@ class Cate extends Base
         $this->setMetaKeywords($cate['keywords']);
         $this->setMetaDescription($cate['description']);
         
-        // 模版
-        $viewFile = Template::themePath($cate['template_list']);
-        
-        return $this->fetch($viewFile);
+        return $this->fetchTheme($cate['template_list']);
     }
 }

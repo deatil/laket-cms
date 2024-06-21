@@ -157,13 +157,24 @@ abstract class Base
      */
     protected function fetch($template, $vars = [])
     {
-        if (! file_exists($template)) {
-            $template = app('laket-admin.view-finder')->find($template);
-        }
-        
         return View::fetch($template, $vars);
     }
-    
+
+    /**
+     * 获取模板页面
+     * 
+     * @return string
+     */
+    protected function fetchTheme($template)
+    {
+        $templateEXt = pathinfo($template, PATHINFO_EXTENSION);
+        if ($templateEXt != "") {
+            $template = substr($template, 0, strlen($template) - strlen($templateEXt) - 1);
+        }
+
+        return $this->fetch("cms_theme::".$template);
+    }
+
     /**
      * 操作成功跳转的快捷方法
      * 

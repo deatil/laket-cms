@@ -24,8 +24,6 @@ class Index extends Base
         $this->setMetaKeywords();
         $this->setMetaDescription();
         
-        // 模版
-        $viewFile = Template::themePath('index.html');
-        return $this->fetch($viewFile);
+        return $this->fetchTheme('index.html');
     }
 }
