@@ -34,8 +34,12 @@ class Template
         $theme = SettingsModel::config('web_theme', 'default');
         
         $themePath = static::path($theme);
+        $themePath = $themePath . ($path ? DIRECTORY_SEPARATOR . $path : $path);
         
-        return $themePath . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+        // 主题路径过滤器
+        $themePath = apply_filters('cms_theme_path', $themePath, $theme);
+        
+        return $themePath;
     }
 
     /**
@@ -51,40 +55,51 @@ class Template
         
         $newThemes = collect($themes)
             ->map(function($item) {
-                $infoFile = $item . '/info.php';
-                if (! empty($item) && file_exists($infoFile)) {
-                    $info = include $infoFile;
-                    
-                    $coverFile = $item . '/' . Arr::get($info, 'cover');
-                    if (file_exists($coverFile)) {
-                        $coverData = file_get_contents(realpath($coverFile));
-                        $cover = "data:image/png;base64,".base64_encode($coverData);
-                    } else {
-                        $cover = "";
-                    }
-                    
-                    return [
-                        'name' => Arr::get($info, 'name'),
-                        'remark' => Arr::get($info, 'remark'),
-                        'cover' => $cover,
-                        'version' => Arr::get($info, 'version'),
-                        'author' => Arr::get($info, 'author'),
-                    ];
-                }
-                
-                return null;
+                return static::themeInfo($item);
             })
             ->filter(function($item) {
-                if (! empty($item)) {
-                    return $item;
-                }
-                
-                return null;
+                return !empty($item);
             })
             ->values()
             ->toArray();
         
+        // 所有主题过滤器
+        $newThemes = apply_filters('cms_themes', $newThemes);
+        
         return $newThemes;
+    }
+
+    /**
+     * 获取主题信息
+     */
+    public static function themeInfo($path) 
+    {
+        if (! empty($path) && file_exists($infoFile = $path . '/info.php')) {
+            $info = include $infoFile;
+            
+            $coverFile = $path . '/' . Arr::get($info, 'cover');
+            if (file_exists($coverFile)) {
+                $coverData = file_get_contents(realpath($coverFile));
+                $cover = "data:image/png;base64,".base64_encode($coverData);
+            } else {
+                $cover = "";
+            }
+            
+            $themeInfo = [
+                'name'    => Arr::get($info, 'name'),
+                'remark'  => Arr::get($info, 'remark'),
+                'cover'   => $cover,
+                'version' => Arr::get($info, 'version'),
+                'author'  => Arr::get($info, 'author'),
+            ];
+            
+            // 主题信息过滤器
+            $themeInfo = apply_filters('cms_theme_info', $themeInfo);
+            
+            return $themeInfo;
+        }
+        
+        return [];
     }
 
 }
