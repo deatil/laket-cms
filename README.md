@@ -16,7 +16,7 @@
 *  安装后配置文件位置: `/config/cms.php`
 *  安装后模版主题位置: `/view/laket-cms/template`
 *  安装后模版主题资源位置: `/public/static/laket-cms/template`
-*  模板开发文档: [`Theme`](/docs/theme.md)
+*  模板开发文档: [`theme.md`](/docs/theme.md)
 *  用户首页: `/cms`
 
 
