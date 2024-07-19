@@ -23,6 +23,14 @@ class Service extends BaseService
      */
     public $composer = __DIR__ . '/../composer.json';
     
+    /**
+     * 包名
+     */
+    protected $pkg = 'laket/laket-cms';
+    
+    /**
+     * 权限菜单 slug
+     */
     protected $slug = 'laket-admin.flash.cms';
     
     /**
@@ -50,6 +58,18 @@ class Service extends BaseService
         Flash::extend('laket/laket-cms', __CLASS__);
     }
     
+    /**
+     * 在插件安装、插件卸载等操作时有效
+     */
+    public function action()
+    {
+        register_install_hook($this->pkg, [$this, 'install']);
+        register_uninstall_hook($this->pkg, [$this, 'uninstall']);
+        register_upgrade_hook($this->pkg, [$this, 'upgrade']);
+        register_enable_hook($this->pkg, [$this, 'enable']);
+        register_disable_hook($this->pkg, [$this, 'disable']);
+    }
+
     /**
      * 开始，只有启用后加载
      */
